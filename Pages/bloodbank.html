@@ -7,6 +7,72 @@
      <link rel="stylesheet" href="../style/bloodbank.css">
 </head>
 <body>
-    
+    <div class="container">
+        <section class="bloodbank">
+            <h1>Blood Bank</h1>
+            <p>Welcome to our blood bank. You can search for available blood types or register as a donor to help save lives.</p>
+            
+            <!-- Blood Search Form -->
+            <div class="blood-search">
+                <h2>Search for Available Blood</h2>
+                <form action="" method="POST">
+                    <label for="blood-type">Select Blood Type:</label>
+                    <select id="blood-type" name="blood_type" required>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                    
+                    <button type="submit">Search Blood</button>
+                </form>
+            </div>
+            
+            <!-- Donor Registration Form -->
+            <div class="donor-registration">
+                <h2>Register as a Donor</h2>
+                <form action="" method="POST">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="age">Your Age:</label>
+                    <input type="number" id="age" name="age" required>
+                    
+                    <label for="blood-type-reg">Your Blood Type:</label>
+                    <select id="blood-type-reg" name="blood_type" required>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required>
+
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Blood Donation Information Section -->
+        <section class="info">
+            <h2>Why Donate Blood?</h2>
+            <p>Blood donation helps save lives and is a simple yet invaluable gift to those in need. One donation can save up to three lives. Regular blood donations ensure that hospitals always have blood available during emergencies.</p>
+            <h3>Eligibility to Donate Blood:</h3>
+            <ul>
+                <li>Age between 18 and 65 years</li>
+                <li>Weight at least 50kg</li>
+                <li>Good general health</li>
+            </ul>
+        </section>
+    </div>
 </body>
 </html>
