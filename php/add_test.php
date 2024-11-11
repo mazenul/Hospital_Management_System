@@ -22,8 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "INSERT INTO MedicalTests (TestName, TestPrice) VALUES ('$testName', '$testPrice')";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: ../html/medical_tests.html");
-        exit();
+        echo "New test added successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

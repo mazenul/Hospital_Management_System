@@ -3,10 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Checkups</title>
+    <title>Manage Medical Tests</title>
     <link rel="stylesheet" href="../style/medicaltest.css">
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Medical Tests</h1>
+        <form action="../php/add_test.php" method="POST">
+            <label for="testName">Test Name:</label>
+            <input type="text" id="testName" name="testName" required>
+            
+            <label for="testPrice">Test Price:</label>
+            <input type="number" step="0.01" id="testPrice" name="testPrice" required>
+            
+            <button type="submit">Add Test</button>
+        </form>
+        <section id="content">
+            <h2>Existing Medical Tests</h2>
+            <!-- PHP will embed the medical tests content here -->
+            <?php include '../php/display_tests.php'; ?>
+        </section>
+    </div>
 </body>
 </html>
