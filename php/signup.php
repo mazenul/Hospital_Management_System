@@ -1,40 +1,31 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = ""; // Your MySQL password
-$dbname = "hospital";
+// Include the database connection
+include "connect.php";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get form data and escape to prevent SQL injection
+    $role = mysqli_real_escape_string($conn, $_POST['role']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = mysqli_real_escape_string($conn, md5($_POST['password'])); // Hashing the password using MD5
+    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+    $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+    $dob = mysqli_real_escape_string($conn, $_POST['dob']);
+    $gender = mysqli_real_escape_string($conn, $_POST['gender']);
+    $address = mysqli_real_escape_string($conn, $_POST['address']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $specialty = mysqli_real_escape_string($conn, $_POST['specialty']);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    // Insert user into the database
+    $sql = "INSERT INTO Users (Username, Password, Role, FirstName, LastName, DOB, Gender, Address, Phone, Email, Specialty)
+    VALUES ('$username', '$password', '$role', '$firstname', '$lastname', '$dob', '$gender', '$address', '$phone', '$email', '$specialty')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
 }
-
-// Get form data
-$role = $_POST['role'];
-$username = $_POST['username'];
-$password = md5($_POST['password']); // Hashing the password using MD5
-$firstname = $_POST['firstname'];
-$lastname = $_POST['lastname'];
-$dob = $_POST['dob'];
-$gender = $_POST['gender'];
-$address = $_POST['address'];
-$phone = $_POST['phone'];
-$email = $_POST['email'];
-$specialty = $_POST['specialty'];
-
-// Insert user into the database
-$sql = "INSERT INTO Users (Username, Password, Role, FirstName, LastName, DOB, Gender, Address, Phone, Email, Specialty)
-VALUES ('$username', '$password', '$role', '$firstname', '$lastname', '$dob', '$gender', '$address', '$phone', '$email', '$specialty')";
-
-if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$conn->close();
 ?>
