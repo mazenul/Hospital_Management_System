@@ -3,10 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Panal</title>
+    <title>Doctor Dashboard</title>
     <link rel="stylesheet" href="../style/doctor.css">
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Welcome, Dr. [Doctor's Name]</h1>
+        <nav>
+            <ul>
+                <li><a href="#patients">Patient List</a></li>
+                <li><a href="#appointments">Appointments</a></li>
+                <li><a href="#history">Medical History</a></li>
+                <li><a href="#add-checkup">Add Checkup</a></li>
+                <li><a href="../php/logout.php">Logout</a></li>
+            </ul>
+        </nav>
+        <section id="content">
+            <!-- PHP will embed the doctor's content here -->
+            <?php include '../php/doctor_content.php'; ?>
+        </section>
+    </div>
 </body>
 </html>
