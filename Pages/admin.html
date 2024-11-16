@@ -10,46 +10,47 @@
     <div id="container">
         <div id="patient">
             <h2>Patient Management</h2>
-            <label for="PatientID">Patient ID:</label>
-            <input type="text" name="PatientID" id="PatientID">
-            <button>Delete</button><br><br>
-            <label for="searchpat">Search Patient:</label>
-            <input type="text" name="searchpat" id="searchpat">
-            <button>Search</button>
+            <form action="../php/delete_patient.php" method="POST">
+                <label for="PatientID">Patient ID:</label>
+                <input type="text" name="PatientID" id="PatientID">
+                <button type="submit">Delete</button>
+            </form>
+            <form action="../php/search_patient.php" method="GET">
+                <label for="searchpat">Search Patient:</label>
+                <input type="text" name="searchpat" id="searchpat">
+                <button type="submit">Search</button>
+            </form>
         </div>
 
         <div id="doctor">
             <h2>Doctor Management</h2>
-            <label for="doctorid">Doctor ID:</label>
-            <input type="text" name="doctorid" id="doctorid">
-            <button>Delete</button><br><br>
-            <label for="searchdoc">Search Doctor:</label>
-            <input type="text" name="searchdoc" id="searchdoc">
-            <button>Search</button>
+            <form action="../php/delete_doctor.php" method="POST">
+                <label for="doctorid">Doctor ID:</label>
+                <input type="text" name="doctorid" id="doctorid">
+                <button type="submit">Delete</button>
+            </form>
+            <form action="../php/search_doctor.php" method="GET">
+                <label for="searchdoc">Search Doctor:</label>
+                <input type="text" name="searchdoc" id="searchdoc">
+                <button type="submit">Search</button>
+            </form>
         </div>
 
         <div id="medicaltest">
             <h2>Medical Test Management</h2>
-            <label for="medicaltestid">Medical Test ID:</label>
-            <input type="text" name="medicaltestid" id="medicaltestid">
-            <label for="selectmedicaltest">Select Medical Test:</label>
-            <select name="selectmedicaltest" id="selectmedicaltest">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
-            <button>Cart</button>
-
-            <label for="medicaltestname">Medical Test Name:</label>
-            <input type="text" name="medicaltestname" id="medicaltestname">
-            <label for="medicaltestprice">Price:</label>
-            <input type="text" name="medicaltestprice" id="medicaltestprice">
-            <button>Add</button><br><br>
-
-            <label for="medicaltestdelete">Medical Test ID:</label>
-            <input type="text" name="medicaltestdelete" id="medicaltestdelete">
-            <button>Remove</button><br><br>
+            <form action="../php/add_medicaltest.php" method="POST">
+                <label for="medicaltestname">Medical Test Name:</label>
+                <input type="text" name="medicaltestname" id="medicaltestname">
+                <label for="medicaltestprice">Price:</label>
+                <input type="text" name="medicaltestprice" id="medicaltestprice">
+                <button type="submit">Add</button>
+            </form>
+            <form action="../php/remove_medicaltest.php" method="POST">
+                <label for="medicaltestid">Medical Test ID:</label>
+                <input type="text" name="medicaltestid" id="medicaltestid">
+                <button type="submit">Remove</button>
+            </form>
+            
         </div>
     </div>
 </body>
