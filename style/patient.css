@@ -1,3 +1,4 @@
+/* style/patient.css */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -21,30 +22,4 @@ body {
 h1 {
     text-align: center;
     color: #333;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #4CAF50;
-    font-weight: bold;
-}
-
-nav ul li a:hover {
-    color: #45a049;
-}
-
-#content {
-    margin-top: 20px;
 }
