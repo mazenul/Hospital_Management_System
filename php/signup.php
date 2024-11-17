@@ -21,11 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     VALUES ('$username', '$password', '$role', '$firstname', '$lastname', '$dob', '$gender', '$address', '$phone', '$email', '$specialty')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+       
+        header("location: ../Pages/index.html");
+        //echo' <script>alert("User registered successfully!");</script>';
+        
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
+
+       
+
     }
 
     $conn->close();
+    
 }
-?>
