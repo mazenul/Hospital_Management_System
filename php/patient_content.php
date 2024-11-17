@@ -75,6 +75,7 @@ if ($result->num_rows > 0) {
 } else {
     echo "Patient details not found.";
 }
-
+// Add a button to navigate to appointment creation page
+echo '<a href="appointment.php" class="create-appointment-btn">Create Appointment</a>';
 $conn->close();
 ?>

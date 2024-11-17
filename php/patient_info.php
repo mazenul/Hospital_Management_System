@@ -51,6 +51,10 @@ if (isset($_SESSION['UserID']) && $_SESSION['Role'] == 'Patient') {
     } else {
         echo "No medical history found.";
     }
+    echo'<br>';
+    // Add a button to navigate to appointment creation page
+    echo '<a href="appointments.php" class="create-appointment-btn">Create Appointment</a>';
+
 } else {
     echo "Unauthorized access.";
 }

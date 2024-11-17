@@ -12,7 +12,7 @@
         <section id="info">
             <?php include '../php/doctor_info.php'; ?>
         </section>
-        <form action="php/clear_appointments.php" method="POST">
+        <form action="../php/clear_appointments.php" method="POST">
             <button type="submit">Clear All Appointments</button>
         </form>
     </div>

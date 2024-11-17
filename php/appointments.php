@@ -5,7 +5,6 @@ $username = "root";
 $password = ""; // Your MySQL password
 $dbname = "hospital";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
@@ -13,34 +12,68 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+session_start();
+$patientID = $_SESSION['UserID'];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get form data
-    $doctorID = mysqli_real_escape_string($conn, $_POST['doctor']);
-    $patientName = mysqli_real_escape_string($conn, $_POST['patient']);
-    $appointmentDate = mysqli_real_escape_string($conn, $_POST['date']);
-    $appointmentTime = mysqli_real_escape_string($conn, $_POST['time']);
+    // Handle appointment creation
+    $doctorID = $_POST['doctor_id'];
+    $appointmentDate = $_POST['appointment_date'];
+    $appointmentTime = $_POST['appointment_time'];
 
-    // Get Patient ID based on Patient Name (assuming patient names are unique)
-    $sqlPatient = "SELECT UserID FROM Users WHERE Role = 'Patient' AND CONCAT(FirstName, ' ', LastName) = '$patientName'";
-    $resultPatient = $conn->query($sqlPatient);
-    
-    if ($resultPatient->num_rows > 0) {
-        $rowPatient = $resultPatient->fetch_assoc();
-        $patientID = $rowPatient['UserID'];
+    $sql = "INSERT INTO Appointments (DoctorID, PatientID, AppointmentDate, AppointmentTime, Status)
+            VALUES ($doctorID, $patientID, '$appointmentDate', '$appointmentTime', 'Pending')";
 
-        // Insert appointment into the database
-        $sql = "INSERT INTO Appointments (DoctorID, PatientID, AppointmentDate, AppointmentTime, Status)
-                VALUES ('$doctorID', '$patientID', '$appointmentDate', '$appointmentTime', 'Pending')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "Appointment booked successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+    if ($conn->query($sql) === TRUE) {
+        echo "<p class='success'>Appointment created successfully!</p>";
     } else {
-        echo "Patient not found.";
+        echo "<p class='error'>Error: " . $conn->error . "</p>";
     }
-
-    $conn->close();
 }
+
+// Fetch available doctors
+$sqlDoctors = "SELECT UserID, FirstName, LastName, Specialty FROM Users WHERE Role = 'Doctor'";
+$resultDoctors = $conn->query($sqlDoctors);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Appointment</title>
+    <link rel="stylesheet" href="../style/appointment.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create an Appointment</h1>
+        <form method="POST" action="appointments.php">
+            <label for="doctor_id">Select Doctor:</label>
+            <select id="doctor_id" name="doctor_id" required>
+                <?php
+                if ($resultDoctors->num_rows > 0) {
+                    while ($row = $resultDoctors->fetch_assoc()) {
+                        echo "<option value='" . $row['UserID'] . "'>Dr. " . $row['FirstName'] . " " . $row['LastName'] . " (" . $row['Specialty'] . ")</option>";
+                    }
+                } else {
+                    echo "<option value=''>No doctors available</option>";
+                }
+                ?>
+            </select>
+
+            <label for="appointment_date">Appointment Date:</label>
+            <input type="date" id="appointment_date" name="appointment_date" required>
+
+            <label for="appointment_time">Appointment Time:</label>
+            <input type="time" id="appointment_time" name="appointment_time" required>
+
+            <button type="submit" class="btn">Create Appointment</button>
+        </form>
+        <a href="patient.php" class="back-btn">Back to Profile</a>
+    </div>
+</body>
+</html>
+
+<?php
+$conn->close();
 ?>
