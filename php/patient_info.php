@@ -1,5 +1,4 @@
 <?php
-// php/patient_info.php
 session_start();
 include 'connect.php';
 
@@ -51,11 +50,70 @@ if (isset($_SESSION['UserID']) && $_SESSION['Role'] == 'Patient') {
     } else {
         echo "No medical history found.";
     }
-    echo'<br>';
-    // Add a button to navigate to appointment creation page
-    echo '<a href="appointments.php" class="create-appointment-btn">Create Appointment</a>';
 
+    // Fetch and display individual bills
+    echo "<h3>Bills</h3>";
+    $sql = "SELECT Bills.BillID, Bills.Amount, Bills.PaymentStatus, MedicalTests.TestName
+            FROM Bills
+            LEFT JOIN MedicalTests ON Bills.TestID = MedicalTests.TestID
+            WHERE Bills.PatientID = $patientID";
+    $result = $conn->query($sql);
+
+    $totalAmount = 0; // To calculate the total bill
+
+    if ($result->num_rows > 0) {
+        echo "<table border='1'>
+                <tr>
+                    <th>Test Name</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                </tr>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>
+                    <td>" . $row['TestName'] . "</td>
+                    <td>$" . $row['Amount'] . "</td>
+                    <td>" . $row['PaymentStatus'] . "</td>
+                </tr>";
+            if ($row['PaymentStatus'] === 'Unpaid') {
+                $totalAmount += $row['Amount'];
+            }
+        }
+        echo "</table>";
+    } else {
+        echo "No bills found.";
+    }
+
+// Display total bill amount
+echo "<h4>Total Amount Due: $" . $totalAmount . "</h4>";
+
+// Add a Reset Button
+if ($totalAmount > 0) {
+    echo '<form action="../php/reset_bill.php" method="POST">
+            <button type="submit">Reset Bill</button>
+          </form>';
+}
+
+
+    // Add new medical test form
+    echo '<h3>Add Medical Test</h3>';
+    echo '<form action="../php/add_medical_test.php" method="POST">
+            <label for="testID">Select Test:</label>
+            <select name="testID" required>';
+    
+    $sql = "SELECT TestID, TestName FROM MedicalTests";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<option value="' . $row['TestID'] . '">' . $row['TestName'] . '</option>';
+        }
+    }
+    echo '</select>
+            <label for="description">Description:</label>
+            <textarea name="description" required></textarea>
+            <button type="submit">Add Test</button>
+          </form>';
 } else {
     echo "Unauthorized access.";
 }
 $conn->close();
+?>

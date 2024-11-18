@@ -15,6 +15,9 @@
         <form action="../php/clear_appointments.php" method="POST">
             <button type="submit">Clear All Appointments</button>
         </form>
+        <form action="../php/logout.php" method="POST">
+            <button type="submit">Logout</button>
+        </form>
     </div>
 </body>
 </html>
