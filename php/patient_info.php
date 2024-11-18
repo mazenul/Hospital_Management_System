@@ -33,7 +33,12 @@ if (isset($_SESSION['UserID']) && $_SESSION['Role'] == 'Patient') {
         }
     } else {
         echo "No appointments found.";
+        echo'<br><br>';
     }
+    // Add a button to navigate to appointment creation page
+    echo '<a href="appointments.php">Create Appointment</a>';
+
+    
 
     // Fetch and display medical history
     echo "<h3>Medical History</h3>";
@@ -83,15 +88,15 @@ if (isset($_SESSION['UserID']) && $_SESSION['Role'] == 'Patient') {
         echo "No bills found.";
     }
 
-// Display total bill amount
-echo "<h4>Total Amount Due: $" . $totalAmount . "</h4>";
+    // Display total bill amount
+    echo "<h4>Total Amount Due: $" . $totalAmount . "</h4>";
 
-// Add a Reset Button
-if ($totalAmount > 0) {
-    echo '<form action="../php/reset_bill.php" method="POST">
+    // Add a Reset Button
+    if ($totalAmount > 0) {
+        echo '<form action="../php/reset_bill.php" method="POST">
             <button type="submit">Reset Bill</button>
           </form>';
-}
+    }
 
 
     // Add new medical test form
@@ -99,7 +104,7 @@ if ($totalAmount > 0) {
     echo '<form action="../php/add_medical_test.php" method="POST">
             <label for="testID">Select Test:</label>
             <select name="testID" required>';
-    
+
     $sql = "SELECT TestID, TestName FROM MedicalTests";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -116,4 +121,3 @@ if ($totalAmount > 0) {
     echo "Unauthorized access.";
 }
 $conn->close();
-?>
