@@ -1,0 +1,60 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* Container for the content */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Page title */
+h1 {
+    color: #343a40;
+    margin-bottom: 30px;
+}
+
+/* Doctor list styling */
+.doctor-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Doctor card styling */
+.doctor-card {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Doctor card hover effect */
+.doctor-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Doctor name */
+.doctor-card h2 {
+    color: #007bff;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+/* Doctor specialization */
+.doctor-card p {
+    color: #6c757d;
+    margin: 0;
+    font-size: 1em;
+}

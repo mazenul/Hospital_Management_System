@@ -96,3 +96,19 @@ img {
     width: 100%;
     height: auto;
 }
+
+#map{
+    width: 100%;
+    padding: 30px;
+    
+    
+   
+}
+
+#welcome, #service {
+    font-size: medium;
+    text-align: left;
+    padding: 30px;
+    background-color: #ebe8e8;
+    
+}
