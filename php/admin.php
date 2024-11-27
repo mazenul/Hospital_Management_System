@@ -95,7 +95,13 @@ $tests = $conn->query("SELECT * FROM MedicalTests");
     </script>
 </head>
 <body>
+    
     <div class="admin-container">
+        <div id="logout">
+        <form action="../php/logout.php" method="POST">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
         <h1>Admin Control Panel</h1>
 
         <!-- Doctor Management -->

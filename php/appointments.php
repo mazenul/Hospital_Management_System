@@ -21,13 +21,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $appointmentDate = $_POST['appointment_date'];
     $appointmentTime = $_POST['appointment_time'];
 
-    $sql = "INSERT INTO Appointments (DoctorID, PatientID, AppointmentDate, AppointmentTime, Status)
-            VALUES ($doctorID, $patientID, '$appointmentDate', '$appointmentTime', 'Pending')";
+    // Convert time to 24-hour format for comparison
+    $appointmentTime24 = date("H:i", strtotime($appointmentTime));
+    $startTime = "12:00";
+    $endTime = "22:00";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "<p class='success'>Appointment created successfully!</p>";
+    // Check if the appointment time is within the allowed range
+    if ($appointmentTime24 < $startTime || $appointmentTime24 > $endTime) {
+        echo "<script>alert('Appointment time must be between 12:00 PM and 10:00 PM.');</script>";
     } else {
-        echo "<p class='error'>Error: " . $conn->error . "</p>";
+        // Check if the doctor already has an appointment at the same time
+        $sqlCheck = "SELECT * FROM Appointments 
+                     WHERE DoctorID = $doctorID AND AppointmentDate = '$appointmentDate' AND AppointmentTime = '$appointmentTime'";
+        $resultCheck = $conn->query($sqlCheck);
+
+        if ($resultCheck->num_rows > 0) {
+            echo "<script>alert('The doctor already has an appointment at this time. Please choose a different time.');</script>";
+        } else {
+            // Insert the appointment into the database
+            $sql = "INSERT INTO Appointments (DoctorID, PatientID, AppointmentDate, AppointmentTime, Status)
+                    VALUES ($doctorID, $patientID, '$appointmentDate', '$appointmentTime', 'Pending')";
+
+            if ($conn->query($sql) === TRUE) {
+                echo "<script>alert('Appointment created successfully!');</script>";
+            } else {
+                echo "<script>alert('Error: " . $conn->error . "');</script>";
+            }
+        }
     }
 }
 
