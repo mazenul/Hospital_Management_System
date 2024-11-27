@@ -16,22 +16,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $specialty = mysqli_real_escape_string($conn, $_POST['specialty']);
 
-    // Insert user into the database
-    $sql = "INSERT INTO Users (Username, Password, Role, FirstName, LastName, DOB, Gender, Address, Phone, Email, Specialty)
-    VALUES ('$username', '$password', '$role', '$firstname', '$lastname', '$dob', '$gender', '$address', '$phone', '$email', '$specialty')";
+    // Check if username already exists
+    $checkUsernameQuery = "SELECT * FROM Users WHERE Username='$username'";
+    $result = $conn->query($checkUsernameQuery);
 
-    if ($conn->query($sql) === TRUE) {
-       
-        header("location: ../Pages/index.html");
-        //echo' <script>alert("User registered successfully!");</script>';
+    if ($result->num_rows > 0) {
+        // Username already exists, show an alert and stay on the same page
         
+        echo '<script>alert("Username already exists. Please choose a different username.");</script>';
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        // Insert user into the database
+        $sql = "INSERT INTO Users (Username, Password, Role, FirstName, LastName, DOB, Gender, Address, Phone, Email, Specialty)
+        VALUES ('$username', '$password', '$role', '$firstname', '$lastname', '$dob', '$gender', '$address', '$phone', '$email', '$specialty')";
 
-       
-
+        if ($conn->query($sql) === TRUE) {
+            header("location: ../Pages/index.html");
+            //echo' <script>alert("User registered successfully!");</script>';
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     }
 
     $conn->close();
-    
 }
+?>
