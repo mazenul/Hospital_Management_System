@@ -53,6 +53,13 @@ if (isset($_POST['delete_test'])) {
     $conn->query("DELETE FROM MedicalTests WHERE TestID = '$test_id'");
 }
 
+// Delete Blood Group
+if (isset($_POST['delete_blood'])) {
+    $blood_id = $_POST['blood_id'];
+    $conn->query("DELETE FROM BloodBank WHERE BloodID = '$blood_id'");
+}
+
+
 // View Data
 $doctors = $conn->query("SELECT * FROM Users WHERE Role = 'Doctor'");
 $patients = $conn->query("SELECT * FROM Users WHERE Role = 'Patient'");
@@ -177,6 +184,10 @@ $tests = $conn->query("SELECT * FROM MedicalTests");
                                     <input type="number" name="new_units" placeholder="New Units" required>
                                     <button type="submit" name="update_blood_units">Update</button>
                                 </form>
+                                <form method="post" style="display: inline;">
+                                    <input type="hidden" name="blood_id" value="<?= $blood['BloodID'] ?>">
+                                    <button type="submit" name="delete_blood">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     <?php } ?>
@@ -189,6 +200,7 @@ $tests = $conn->query("SELECT * FROM MedicalTests");
                 <button type="submit" name="add_blood">Add Blood</button>
             </form>
         </section>
+
 
         <!-- Medical Test Management -->
         <section class="admin-section">
