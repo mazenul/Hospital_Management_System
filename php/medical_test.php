@@ -1,16 +1,7 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "root"; // Replace with your database username
-$password = ""; // Replace with your database password
-$dbname = "hospital";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include "connect.php";
 
 // Fetch medical test data
 $sql = "SELECT TestName, TestPrice FROM MedicalTests";
@@ -26,8 +17,13 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="../style/medical_test.css">
 </head>
 <body>
+    
+
     <div class="container">
         <h1>Available Medical Tests</h1>
+        <div id="back">
+        <button><a href="../Pages/index.html">Back</a></button>
+        </div>
         <table>
             <thead>
                 <tr>

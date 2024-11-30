@@ -48,17 +48,18 @@ nav a:hover {
 }
 
 .slide-container {
-    display: flex;
-    width: 300%; /* Adjust based on the number of images */
+    position: relative;
+    width: 100%;
     height: 100%;
-    animation: slideShow 12s  infinite; /* Steps for seamless animation */
-    transition: transform 5s ease;
 }
 
-
-
 .slide {
-    flex: 1; /* Ensures all slides have equal width */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    z-index: 0;
 }
 
 .slide img {
@@ -68,18 +69,36 @@ nav a:hover {
 }
 
 /* Slideshow animation */
-@keyframes slideShow {
+@keyframes fadeSlideShow {
     0% {
-        transform: translateX(0%);
+        opacity: 1;
     }
-    50% {
-        transform: translateX(-100%);
+    33.33% {
+        opacity: 1;
+    }
+    66.66% {
+        opacity: 0;
     }
     100% {
-        transform: translateX(-200%);
+        opacity: 0;
     }
-    
 }
+
+/* Apply the animation to each slide with delays */
+.slide:nth-child(1) {
+    animation: fadeSlideShow 12s infinite;
+}
+
+.slide:nth-child(2) {
+    animation: fadeSlideShow 12s infinite;
+    animation-delay: 4s;
+}
+
+.slide:nth-child(3) {
+    animation: fadeSlideShow 12s infinite;
+    animation-delay: 8s;
+}
+
 
 
 /* About Us section styles */

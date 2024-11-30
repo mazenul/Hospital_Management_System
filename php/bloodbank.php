@@ -47,7 +47,7 @@ $conn->close();
     <link rel="stylesheet" type="text/css" href="../style/bloodbank.css">
 </head>
 <body>
-
+<br><br><br><br>
 <h2>Blood Bank Management</h2>
 
 <table>
@@ -89,7 +89,7 @@ $conn->close();
 </form>
 
 <div>
-    <button id = "back"><a href="../Pages/index.html">Back to Home</a></button>
+    <button id = "back"><a href="../Pages/index.html">Back </a></button>
 </div>
 
 </body>

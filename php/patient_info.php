@@ -94,7 +94,7 @@ if (isset($_SESSION['UserID']) && $_SESSION['Role'] == 'Patient') {
     // Add a Reset Button
     if ($totalAmount > 0) {
         echo '<form action="../php/reset_bill.php" method="POST">
-            <button type="submit">Reset Bill</button>
+            <button type="submit">Pay Bill</button>
           </form>';
     }
 

@@ -57,3 +57,25 @@ h1 {
         width: 80%;
     }
 }
+#back a{
+    text-decoration: none;
+    color: white;
+}
+
+#back button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#back button:hover{
+    background-color: #71ce74;
+}
+
+#back{
+    display: flex;
+    justify-content: flex-end;
+}

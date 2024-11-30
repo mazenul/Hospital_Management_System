@@ -28,6 +28,9 @@ $result = $conn->query($sql);
 <body>
     <div class="container">
         <h1>Our Doctors</h1>
+        <div id="back">
+        <button><a href="../Pages/index.html">Back</a></button>
+        </div>
         <div class="doctor-list">
             <?php
             if ($result->num_rows > 0) {
